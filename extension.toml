@@ -1,0 +1,15 @@
+id = "motoko"
+name = "Motoko"
+description = "Motoko support."
+version = "0.1.0"
+schema_version = 1
+authors = ["Yota Inomoto <yota@perforate.org>"]
+repository = "https://github.com/perforate-org/zed-motoko"
+
+[grammars.motoko]
+repository = "https://github.com/polychromatist/tree-sitter-motoko"
+rev = "a172fd1ddc09b9c3806c0d6ecd71ee2f5160aebc"
+
+[language_servers.motoko-language-server]
+name = "Motoko Language Server"
+languages = ["Motoko"]
