@@ -7,8 +7,8 @@ authors = ["Yota Inomoto <yota@perforate.org>"]
 repository = "https://github.com/perforate-org/zed-motoko"
 
 [grammars.motoko]
-repository = "https://github.com/polychromatist/tree-sitter-motoko"
-rev = "a172fd1ddc09b9c3806c0d6ecd71ee2f5160aebc"
+repository = "https://github.com/christoph-dfinity/tree-sitter-motoko"
+rev = "d023c718e005365234ab66ecd5ccff72c80bf587"
 
 [language_servers.motoko-language-server]
 name = "Motoko Language Server"
