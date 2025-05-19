@@ -48,6 +48,7 @@
   "prim"
   "debug_show"
   "do"
+  "persistent"
 ] @keyword
 
 ; Literals
