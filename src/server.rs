@@ -39,8 +39,6 @@ impl MotokoExtension {
         let latest_package_name = format!("{}-{}", PACKAGE_NAME, release_version);
         let server_path = format!("{}/{}", &latest_package_name, SERVER_PATH);
 
-        println!("{}", server_path);
-
         if !self.server_exists(&server_path) {
             zed::set_language_server_installation_status(
                 language_server_id,
