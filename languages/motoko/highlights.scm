@@ -110,6 +110,6 @@
 
 (identifier) @variable
 
-; CamelCase or ALL_CAPS for classes
+; CamelCase for classes
 ((identifier) @type.class
   (#match? @type.class "^_*[A-Z][A-Za-z0-9_]*$"))
