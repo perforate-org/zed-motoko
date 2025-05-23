@@ -90,18 +90,20 @@ impl MotokoExtension {
                 continue;
             }
 
-            let file_name = match path.file_name() {
+            let dir_name = match path.file_name() {
                 Some(name) => name.to_string_lossy().to_string(),
                 None => continue,
             };
 
-            // Check if this is a vscode-motoko package, but not the latest one
-            if file_name.starts_with(PACKAGE_NAME) && file_name != latest_package_name {
-                println!("Removing old package: {}", file_name);
+            // Check if this is a vscode-motoko package directory, but not the latest one
+            if dir_name.starts_with(PACKAGE_NAME) && dir_name != latest_package_name {
+                println!("Removing old package directory: {} (full path: {})", dir_name, path.display());
 
-                match fs::remove_dir_all(&path) {
-                    Ok(_) => (),
-                    Err(e) => println!("Warning: Failed to remove old package {}: {}", file_name, e),
+                // Ensure we're removing the entire vscode-motoko directory
+                if let Err(e) = fs::remove_dir_all(&path) {
+                    println!("Warning: Failed to remove old package directory {}: {}", dir_name, e);
+                } else {
+                    println!("Successfully removed old package directory: {}", dir_name);
                 }
             }
         }
