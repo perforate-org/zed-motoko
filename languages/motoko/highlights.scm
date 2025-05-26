@@ -83,6 +83,7 @@
 
 ; Variables
 [
+  (identifier)
   (var_exp)
   (var_pat)
 ] @variable
@@ -109,8 +110,6 @@
 ["(" ")" "[" "]" "{" "}" "<" ">"] @punctuation.bracket
 ["." "," ";" ":"] @punctuation.delimiter
 ["#" "<:"] @punctuation.special
-
-(identifier) @variable
 
 ; CamelCase for classes
 ((identifier) @type.class
