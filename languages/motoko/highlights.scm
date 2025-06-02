@@ -141,12 +141,12 @@
 
 (inst
   "<" @operator
-  "system"? @type
+  "system"? @type.special
   ">" @operator)
 
 (typ_params
   "<" @operator
-  "system"? @type
+  "system"? @type.special
   ">" @operator)
 
 ; CamelCase for classes
