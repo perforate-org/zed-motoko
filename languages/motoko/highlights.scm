@@ -112,6 +112,13 @@
 (func_dec
   name: (identifier) @function)
 
+; Properties
+(dot_exp_block
+  (identifier) @property)
+
+(dot_exp_object
+  (identifier) @property)
+
 ; Identifies function calls followed by dot notation as method calls
 (call_exp_block
   (dot_exp_block
