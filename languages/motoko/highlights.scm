@@ -70,10 +70,6 @@
 (block_comment) @comment
 (doc_comment) @comment.doc
 
-; Functions
-(func_dec
-  name: (identifier) @function)
-
 ; Types
 [
   (type_identifier)
@@ -98,19 +94,66 @@
 ] @operator
 
 [
-  "+" "-" "*" "/" "%" "**" "+%" "*%" "**%" "&" "|" "^" "<<" ">>" "<<>" "<>>" "->"
-  "#" "==" "!=" "<" "<=" ">" ">=" "+=" "-=" "*=" "**=" "/=" "%=" "+%=" "-%=" "*%=" "="
-  "**%=" "&=" "|=" "^=" "<<=" ">>=" "<<>=" "<>>=" "@=" "|>" "?" "and" "or" "not" "!" ":="
+  "+" "-" "*" "/" "%" "**" "+%" "*%" "**%" "&" "|" "^" "<<" ">>" "<<>" "<>>" "->" "#"
+  "#" "==" "!=" "<" "<=" ">" ">=" "+=" "-=" "*=" "**=" "/=" "%=" "+%=" "-%=" "*%=" "=" "<:"
+  "**%=" "&=" "|=" "^=" "<<=" ">>=" "<<>=" "<>>=" "@=" "|>" "?" "and" "or" "not" "!" ":=" ":"
 ] @operator
 
-; Tags
-(tag_identifier) @tag
-
 ; Punctuation
-["(" ")" "[" "]" "{" "}" "<" ">"] @punctuation.bracket
-["." "," ";" ":"] @punctuation.delimiter
-["#" "<:"] @punctuation.special
+["(" ")" "[" "]" "{" "}"] @punctuation.bracket
+["." "," ";"] @punctuation.delimiter
+
+(_
+  .
+  "<" @punctuation.bracket
+  ">" @punctuation.bracket)
+
+; Functions
+(func_dec
+  name: (identifier) @function)
+
+; Identifies function calls followed by dot notation as method calls
+(call_exp_block
+  (dot_exp_block
+    (identifier) @function.method)
+    (par_exp))
+
+(call_exp_object
+  (dot_exp_object
+    (identifier) @function.method)
+    (par_exp))
+
+; Normal function call
+(call_exp_block
+  (var_exp (identifier) @function)
+  (par_exp))
+
+(call_exp_object
+  (var_exp (identifier) @function)
+  (par_exp))
+
+; Type parameters
+(path_typ
+  (
+    "<" @operator
+    ">" @operator
+  )?)
+
+(inst
+  "<" @operator
+  "system"? @type
+  ">" @operator)
+
+(typ_params
+  "<" @operator
+  "system"? @type
+  ">" @operator)
 
 ; CamelCase for classes
 ((identifier) @type.class
   (#match? @type.class "^_*[A-Z][A-Za-z0-9_]*$"))
+
+; Tags
+(tag_identifier
+  "#" @tag
+  (identifier) @tag)
