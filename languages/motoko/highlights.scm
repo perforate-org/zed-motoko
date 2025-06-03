@@ -93,11 +93,15 @@
   (rel_op)
 ] @operator
 
-[
-  "+" "-" "*" "/" "%" "**" "+%" "*%" "**%" "&" "|" "^" "<<" ">>" "<<>" "<>>" "->" "#"
-  "#" "==" "!=" "<" "<=" ">" ">=" "+=" "-=" "*=" "**=" "/=" "%=" "+%=" "-%=" "*%=" "=" "<:"
-  "**%=" "&=" "|=" "^=" "<<=" ">>=" "<<>=" "<>>=" "@=" "|>" "?" "and" "or" "not" "!" ":=" ":"
-] @operator
+["->" "=" "<:" "?" ":"] @operator
+
+(bang_exp_block "!" @operator)
+(bang_exp_object "!" @operator)
+
+(assign_exp_block ":=" @operator)
+(assign_exp_object ":=" @operator)
+
+(not_exp "not" @operator)
 
 ; Punctuation
 ["(" ")" "[" "]" "{" "}"] @punctuation.bracket
