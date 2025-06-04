@@ -107,11 +107,6 @@
 ["(" ")" "[" "]" "{" "}"] @punctuation.bracket
 ["." "," ";"] @punctuation.delimiter
 
-(_
-  .
-  "<" @punctuation.bracket
-  ">" @punctuation.bracket)
-
 ; Functions
 (func_dec
   name: (identifier) @function)
