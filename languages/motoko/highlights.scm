@@ -93,7 +93,7 @@
   (rel_op)
 ] @operator
 
-["->" "=" "<:" "?" ":"] @operator
+["->" "=" "<:" "?" ":" "<" ">"] @operator
 
 (bang_exp_block "!" @operator)
 (bang_exp_object "!" @operator)
@@ -138,22 +138,12 @@
   (var_exp (identifier) @function)
   (par_exp))
 
+; Tuple projection
+(proj_identifier) @number
+
 ; Type parameters
-(path_typ
-  (
-    "<" @operator
-    ">" @operator
-  )?)
-
-(inst
-  "<" @operator
-  "system"? @type.special
-  ">" @operator)
-
-(typ_params
-  "<" @operator
-  "system"? @type.special
-  ">" @operator)
+(inst "system"? @type.special)
+(typ_params "system"? @type.special)
 
 ; CamelCase for classes
 ((identifier) @type.class

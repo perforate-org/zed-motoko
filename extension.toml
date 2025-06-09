@@ -8,7 +8,7 @@ repository = "https://github.com/perforate-org/zed-motoko"
 
 [grammars.motoko]
 repository = "https://github.com/christoph-dfinity/tree-sitter-motoko"
-rev = "baf083737baf0750be3ea25538a5b2d98937a51c"
+rev = "b2df9eee5f207d26201b2a934c9d2655c6cdfda4"
 
 [language_servers.motoko-language-server]
 name = "Motoko Language Server"
