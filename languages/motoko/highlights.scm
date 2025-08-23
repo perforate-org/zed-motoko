@@ -144,6 +144,8 @@
 ; Type parameters
 (inst "system"? @type.special)
 (typ_params "system"? @type.special)
+(typ_bind
+  name: (type_identifier) @type)
 
 ; CamelCase for classes
 ((identifier) @type.class
