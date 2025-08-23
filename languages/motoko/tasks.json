@@ -1,0 +1,17 @@
+[
+  {
+    "label": "Deploy to Playground (20 Minutes)",
+    "command": "dfx",
+    "args": ["deploy", "--playground"]
+  },
+  {
+    "label": "Import Mops Packages",
+    "command": "mops",
+    "args": ["sources"]
+  },
+  {
+    "label": "Update Mops Packages",
+    "command": "mops",
+    "args": ["update"]
+  }
+]
