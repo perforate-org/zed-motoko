@@ -14,10 +14,8 @@ impl MotokoExtension {
         &mut self,
         language_server_id: &LanguageServerId,
     ) -> Result<String> {
-        if let Some(path) = &self.cached_script_path {
-            if self.server_exists(path) {
-                return Ok(path.clone());
-            }
+        if let Some(path) = &self.cached_script_path && self.server_exists(path) {
+            return Ok(path.clone());
         }
 
         zed::set_language_server_installation_status(
@@ -36,7 +34,7 @@ impl MotokoExtension {
         // Strip 'v' prefix from release.version if present
         let release_version = release.version.strip_prefix('v').unwrap_or(&release.version);
 
-        let latest_package_name = format!("{}-{}", PACKAGE_NAME, release_version);
+        let latest_package_name = format!("{PACKAGE_NAME}-{release_version}");
         let server_path = format!("{}/{}", &latest_package_name, SERVER_PATH);
 
         if !self.server_exists(&server_path) {
@@ -46,8 +44,7 @@ impl MotokoExtension {
             );
 
             let download_url = format!(
-                "https://github.com/dfinity/vscode-motoko/releases/download/v{}/{}.vsix",
-                release_version, latest_package_name
+                "https://github.com/wiyota/vscode-motoko/releases/download/v{release_version}/{latest_package_name}.vsix"
             );
 
             zed::download_file(
@@ -101,9 +98,9 @@ impl MotokoExtension {
 
                 // Ensure we're removing the entire vscode-motoko directory
                 if let Err(e) = fs::remove_dir_all(&path) {
-                    println!("Warning: Failed to remove old package directory {}: {}", dir_name, e);
+                    println!("Warning: Failed to remove old package directory {dir_name}: {e}");
                 } else {
-                    println!("Successfully removed old package directory: {}", dir_name);
+                    println!("Successfully removed old package directory: {dir_name}");
                 }
             }
         }
