@@ -5,6 +5,7 @@ use zed_extension_api::{
     Worktree,
     Command,
     Result,
+    serde_json::Value,
     settings::LspSettings,
 };
 
@@ -25,9 +26,14 @@ impl zed::Extension for MotokoExtension {
     fn language_server_command(
         &mut self,
         language_server_id: &LanguageServerId,
-        _worktree: &Worktree,
+        worktree: &Worktree,
     ) -> zed::Result<Command> {
         let server_path = self.server_script_path(language_server_id)?;
+
+        let env = LspSettings::for_worktree(language_server_id.as_ref(), worktree)
+            .ok()
+            .and_then(|s| s.binary)
+            .and_then(|binary| binary.env);
 
         Ok(zed::Command {
             command: zed::node_binary_path()?,
@@ -38,7 +44,7 @@ impl zed::Extension for MotokoExtension {
                     .to_string(),
                 "--stdio".to_string(),
             ],
-            env: Default::default(),
+            env: env.into_iter().flat_map(|env| env.into_iter()).collect(),
         })
     }
 
@@ -46,12 +52,32 @@ impl zed::Extension for MotokoExtension {
         &mut self,
         server_id: &LanguageServerId,
         worktree: &Worktree,
-    ) -> zed::Result<Option<zed::serde_json::Value>> {
-        let settings = LspSettings::for_worktree(server_id.as_ref(), worktree)
-            .ok()
-            .and_then(|lsp_settings| lsp_settings.settings.clone())
-            .unwrap_or_default();
-        Ok(Some(settings))
+    ) -> zed::Result<Option<Value>> {
+        let mut settings = LspSettings::for_worktree(server_id.as_ref(), worktree)
+            .map(|lsp_settings| lsp_settings.settings);
+
+        if !matches!(settings, Ok(Some(_))) {
+            settings = self
+                .language_server_initialization_options(server_id, worktree)
+                .map(|initialization_options| {
+                    initialization_options.and_then(|initialization_options| {
+                        initialization_options.get("motoko").cloned()
+                    })
+                })
+        }
+
+        settings
+    }
+
+    fn language_server_initialization_options(
+        &mut self,
+        language_server_id: &LanguageServerId,
+        worktree: &Worktree,
+    ) -> zed::Result<Option<Value>> {
+        let options = LspSettings::for_worktree(language_server_id.as_ref(), worktree)
+            .map(|lsp_settings| lsp_settings.initialization_options)?;
+
+        Ok(options)
     }
 }
 

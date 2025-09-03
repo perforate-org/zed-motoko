@@ -44,7 +44,7 @@ impl MotokoExtension {
             );
 
             let download_url = format!(
-                "https://github.com/wiyota/vscode-motoko/releases/download/v{release_version}/{latest_package_name}.vsix"
+                "https://github.com/dfinity/vscode-motoko/releases/download/v{release_version}/{latest_package_name}.vsix"
             );
 
             zed::download_file(
