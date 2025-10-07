@@ -1,11 +1,6 @@
 use std::{env, fs};
 use zed_extension_api::{
-    self as zed,
-    LanguageServerId,
-    Worktree,
-    Command,
-    Result,
-    serde_json::Value,
+    self as zed, Command, LanguageServerId, Result, Worktree, serde_json::Value,
     settings::LspSettings,
 };
 
@@ -91,7 +86,7 @@ mod zed_ext {
     ///
     /// This is a workaround for https://github.com/bytecodealliance/wasmtime/issues/10415.
     pub fn sanitize_windows_path(path: std::path::PathBuf) -> std::path::PathBuf {
-        use zed_extension_api::{current_platform, Os};
+        use zed_extension_api::{Os, current_platform};
 
         let (os, _arch) = current_platform();
         match os {

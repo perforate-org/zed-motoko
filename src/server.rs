@@ -1,4 +1,5 @@
 use super::*;
+use log::{info, warn};
 
 const SERVER_PATH: &str = "extension/out/server.js";
 const PACKAGE_NAME: &str = "vscode-motoko";
@@ -10,11 +11,10 @@ impl MotokoExtension {
     }
 
     /// Returns the path to the server script.
-    pub fn server_script_path(
-        &mut self,
-        language_server_id: &LanguageServerId,
-    ) -> Result<String> {
-        if let Some(path) = &self.cached_script_path && self.server_exists(path) {
+    pub fn server_script_path(&mut self, language_server_id: &LanguageServerId) -> Result<String> {
+        if let Some(path) = &self.cached_script_path
+            && self.server_exists(path)
+        {
             return Ok(path.clone());
         }
 
@@ -32,7 +32,10 @@ impl MotokoExtension {
         )?;
 
         // Strip 'v' prefix from release.version if present
-        let release_version = release.version.strip_prefix('v').unwrap_or(&release.version);
+        let release_version = release
+            .version
+            .strip_prefix('v')
+            .unwrap_or(&release.version);
 
         let latest_package_name = format!("{PACKAGE_NAME}-{release_version}");
         let server_path = format!("{}/{}", &latest_package_name, SERVER_PATH);
@@ -65,17 +68,17 @@ impl MotokoExtension {
 
     /// Removes old vscode-motoko packages but keeps the latest one
     fn clean_old_packages(&self, latest_package_name: &str) -> Result<()> {
-        let current_dir = env::current_dir()
-            .map_err(|e| format!("failed to get current directory: {e}"))?;
+        let current_dir =
+            env::current_dir().map_err(|e| format!("failed to get current directory: {e}"))?;
 
-        let entries = fs::read_dir(&current_dir)
-            .map_err(|e| format!("failed to read directory: {e}"))?;
+        let entries =
+            fs::read_dir(&current_dir).map_err(|e| format!("failed to read directory: {e}"))?;
 
         for entry in entries {
             let entry = match entry {
                 Ok(entry) => entry,
                 Err(e) => {
-                    println!("Warning: Failed to read directory entry: {e}");
+                    warn!("Failed to read directory entry: {e}");
                     continue;
                 }
             };
@@ -94,13 +97,17 @@ impl MotokoExtension {
 
             // Check if this is a vscode-motoko package directory, but not the latest one
             if dir_name.starts_with(PACKAGE_NAME) && dir_name != latest_package_name {
-                println!("Removing old package directory: {} (full path: {})", dir_name, path.display());
+                info!(
+                    "Removing old package directory: {} (full path: {})",
+                    dir_name,
+                    path.display()
+                );
 
                 // Ensure we're removing the entire vscode-motoko directory
                 if let Err(e) = fs::remove_dir_all(&path) {
-                    println!("Warning: Failed to remove old package directory {dir_name}: {e}");
+                    warn!("Failed to remove old package directory {dir_name}: {e}");
                 } else {
-                    println!("Successfully removed old package directory: {dir_name}");
+                    info!("Successfully removed old package directory: {dir_name}");
                 }
             }
         }
