@@ -157,3 +157,10 @@
 (tag_identifier
   "#" @tag
   (identifier) @tag)
+
+; Record properties
+(object_exp
+  (exp_field (identifier) @property))
+
+(obj_typ
+  (val_tf (identifier) @property))
