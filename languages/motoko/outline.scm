@@ -47,7 +47,7 @@
                         "(" @context
                         ")" @context
                     )
-                    [(async_typ "async" @context) (tup_typ)]
+                    [(async_typ "async" @context) (tup_typ) (path_typ)]
                 )
             )
         )
@@ -66,7 +66,7 @@
                     "(" @context
                     ")" @context
                 )
-                [(async_typ "async" @context) (tup_typ)]
+                [(async_typ "async" @context) (tup_typ) (path_typ)]
             )
         )
     ) @item
@@ -158,7 +158,7 @@
                         "(" @context
                         ")" @context
                     )
-                    [(async_typ "async" @context) (tup_typ)]
+                    [(async_typ "async" @context) (tup_typ) (path_typ)]
                 )
             )
         )
@@ -184,7 +184,7 @@
                     "(" @context
                     ")" @context
                 )
-                [(async_typ "async" @context) (tup_typ)]
+                [(async_typ "async" @context) (tup_typ) (path_typ)]
             )
         )
     ) @item
@@ -201,7 +201,7 @@
                         "(" @context
                         ")" @context
                     )
-                    [(async_typ "async" @context) (tup_typ)]
+                    [(async_typ "async" @context) (tup_typ) (path_typ)]
                 )
             )
         )
@@ -227,7 +227,7 @@
                             "(" @context
                             ")" @context
                         )
-                        [(async_typ "async" @context) (tup_typ)]
+                        [(async_typ "async" @context) (tup_typ) (path_typ)]
                     )?
                 )?
             )
