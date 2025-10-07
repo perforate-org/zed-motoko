@@ -28,6 +28,7 @@
   "label"
   "let"
   "loop"
+  "mixin"
   "module"
   "not"
   "object"
@@ -48,6 +49,7 @@
   "try"
   "type"
   "var"
+  "weak"
   "while"
   "with"
 ] @keyword
