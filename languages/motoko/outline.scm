@@ -23,7 +23,9 @@
     [("shared" "query"?) ("composite"? "query")]? @context
     "func" @context
     name: (identifier) @name
-    return_ty: (typ_annot (async_typ "async" @context)?)?
+    return_ty: (typ_annot
+      (":" @context (async_typ "async" @context))?
+    )?
   ) @item
 )
 
@@ -85,6 +87,33 @@
   ) @item
 )
 
+; Record
+(obj_body
+  (dec_field
+    ["private" "public" "system"]? @context
+    ["flexible" "stable" "transient"]? @context
+    [
+      (let_dec
+        "let" @context
+        (var_pat (identifier) @name)
+        (object_exp)
+      )
+      (var_dec
+        "var" @context
+        (var_pat (identifier) @name)
+        (object_exp)
+      )
+    ]
+  ) @item
+)
+
+(object_exp
+  (exp_field
+    "var"? @context
+    (identifier) @name
+  ) @item
+)
+
 ; Class
 (dec_field
   ["private" "public"]? @context
@@ -138,26 +167,9 @@
     [("shared" "query"?) ("composite"? "query")]? @context
     "func" @context
     name: (identifier) @name
-    return_ty: (typ_annot (async_typ "async" @context)?)?
-  )
-) @item
-
-(dec_field
-  ["private" "public" "system"]? @context
-  (let_dec
-    "let" @context
-    (annot_pat
-      (var_pat (identifier) @name)
-      (typ_annot
-        (func_typ
-          (tup_typ
-            "(" @context
-            ")" @context
-          )
-          [(async_typ "async" @context) (tup_typ) (path_typ)]
-        )
-      )
-    )
+    return_ty: (typ_annot
+      (":" @context (async_typ "async" @context))?
+    )?
   )
 ) @item
 
@@ -166,7 +178,9 @@
     [("shared" "query"?) ("composite"? "query")]? @context
     "func" @context
     name: (identifier) @name
-    return_ty: (typ_annot (async_typ "async" @context)?)?
+    return_ty: (typ_annot
+      (":" @context (async_typ "async" @context))?
+    )?
   ) @item
 )
 
@@ -181,7 +195,7 @@
             "(" @context
             ")" @context
           )
-          [(async_typ "async" @context) (tup_typ) (path_typ)]
+          [("->" @context (async_typ "async" @context)) (tup_typ) (path_typ)]
         )
       )
     )
@@ -198,13 +212,12 @@
           "(" @context
           ")" @context
         )
-        [(async_typ "async" @context) (tup_typ) (path_typ)]
+        [("->" @context (async_typ "async" @context)) (tup_typ) (path_typ)]
       )
     )
   ) @item
 )
 
-; Member Variable
 (obj_body
   (dec_field
     ["private" "public" "system"]? @context
@@ -212,7 +225,18 @@
     [
       (let_dec
         "let" @context
-        (var_pat (identifier) @name)
+        (annot_pat
+          (var_pat (identifier) @name)
+          (typ_annot
+            (func_typ
+              (tup_typ
+                "(" @context
+                ")" @context
+              )
+              [("->" @context (async_typ "async" @context)) (tup_typ) (path_typ)]
+            )
+          )
+        )
       )
       (var_dec
         "var" @context
@@ -223,17 +247,10 @@
               "(" @context
               ")" @context
             )
-            [(async_typ "async" @context) (tup_typ) (path_typ)]
-          )?
-        )?
+            [("->" @context (async_typ "async" @context)) (tup_typ) (path_typ)]
+          )
+        )
       )
     ]
-  ) @item
-)
-
-(object_exp
-  (exp_field
-    "var"? @context
-    (identifier) @name
   ) @item
 )

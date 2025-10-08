@@ -113,6 +113,9 @@
 (func_dec
   name: (identifier) @function)
 
+((var_pat (identifier) @function)
+  (typ_annot (func_typ)))
+
 ; Properties
 (dot_exp_block
   (identifier) @property)
