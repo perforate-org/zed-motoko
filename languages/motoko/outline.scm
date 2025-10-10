@@ -8,16 +8,12 @@
   ["flexible" "stable" "transient"]? @context
   (obj_dec
     ["module" "object" ("persistent"? "actor")] @context
-    (identifier)? @name
-  ) @item
-)
+    (identifier)? @name) @item)
 
 (obj_typ
   (val_tf
     "var"? @context
-    (identifier) @name
-  ) @item
-)
+    (identifier) @name) @item)
 
 ; Class
 (
@@ -25,25 +21,19 @@
   (class_dec
     ("persistent"? "actor")? @context
     "class" @context
-    (type_identifier) @name
-  ) @item
-)
+    (type_identifier) @name) @item)
 
 ; Type
 (
   ["private" "public" "system"]? @context
   (typ_dec
     "type" @context
-    (type_identifier) @name
-  ) @item
-)
+    (type_identifier) @name) @item)
 
 ; Variants
 (variant_typ
   (typ_tag
-    (tag_identifier) @name
-  ) @item
-)
+    (tag_identifier) @name) @item)
 
 ; Function
 (
@@ -54,10 +44,7 @@
     "func" @context
     name: (identifier) @name
     return_ty: (typ_annot
-      (":" @context (async_typ "async" @context))?
-    )?
-  ) @item
-)
+      (":" @context (async_typ "async" @context))?)?) @item)
 
 (
   ["private" "public" "system"]? @context
@@ -70,15 +57,9 @@
         (func_typ
           (tup_typ
             "(" @context
-            ")" @context
-          )
+            ")" @context)
           "->"
-          (async_typ "async" @context)?
-        )
-      )
-    )
-  ) @item
-)
+          (async_typ "async" @context)?)))) @item)
 
 (
   ["private" "public" "system"]? @context
@@ -90,11 +71,6 @@
       (func_typ
         (tup_typ
           "(" @context
-          ")" @context
-        )
+          ")" @context)
         "->"
-        (async_typ "async" @context)?
-      )
-    )
-  ) @item
-)
+        (async_typ "async" @context)?))) @item)

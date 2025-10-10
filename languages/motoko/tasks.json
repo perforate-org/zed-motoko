@@ -1,17 +1,32 @@
 [
   {
-    "label": "Deploy to Playground (20 Minutes)",
+    "label": "dfx deploy --playground",
     "command": "dfx",
     "args": ["deploy", "--playground"]
   },
   {
-    "label": "Import Mops Packages",
+    "label": "mops sources",
     "command": "mops",
     "args": ["sources"]
   },
   {
-    "label": "Update Mops Packages",
+    "label": "mops update",
     "command": "mops",
     "args": ["update"]
+  },
+  {
+    "label": "mo-dev --generate",
+    "command": "mo-dev",
+    "args": ["--generate"]
+  },
+  {
+    "label": "mo-dev --deploy",
+    "command": "mo-dev",
+    "args": ["--deploy"]
+  },
+  {
+    "label": "mo-dev --test",
+    "command": "mo-dev",
+    "args": ["--test"]
   }
 ]
