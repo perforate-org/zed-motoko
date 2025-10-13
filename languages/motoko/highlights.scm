@@ -113,7 +113,8 @@
 (func_dec
   name: (identifier) @function)
 
-((var_pat (identifier) @function)
+(_
+  (var_pat (identifier) @function)
   (typ_annot (func_typ)))
 
 ; Properties
@@ -153,7 +154,8 @@
   name: (type_identifier) @type)
 
 ; CamelCase for classes
-((identifier) @type.class
+(_
+  (identifier) @type.class
   (#match? @type.class "^_*[A-Z][A-Za-z0-9_]*$"))
 
 ; Tags

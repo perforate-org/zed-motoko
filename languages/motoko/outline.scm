@@ -3,7 +3,7 @@
 (doc_comment) @annotation
 
 ; Object
-(
+(_
   ["private" "public" "system"]? @context
   ["flexible" "stable" "transient"]? @context
   (obj_dec
@@ -16,7 +16,7 @@
     (identifier) @name) @item)
 
 ; Class
-(
+(_
   ["private" "public" "system"]? @context
   (class_dec
     ("persistent"? "actor")? @context
@@ -24,7 +24,7 @@
     (type_identifier) @name) @item)
 
 ; Type
-(
+(_
   ["private" "public" "system"]? @context
   (typ_dec
     "type" @context
@@ -36,7 +36,7 @@
     (tag_identifier) @name) @item)
 
 ; Function
-(
+(_
   ["private" "public" "system"]? @context
   ["flexible" "stable" "transient"]? @context
   (func_dec
@@ -46,7 +46,7 @@
     return_ty: (typ_annot
       (":" @context (async_typ "async" @context))?)?) @item)
 
-(
+(_
   ["private" "public" "system"]? @context
   ["flexible" "stable" "transient"]? @context
   (let_dec
@@ -61,7 +61,7 @@
           "->"
           (async_typ "async" @context)?)))) @item)
 
-(
+(_
   ["private" "public" "system"]? @context
   ["flexible" "stable" "transient"]? @context
   (var_dec
