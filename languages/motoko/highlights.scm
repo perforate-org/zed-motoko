@@ -70,6 +70,7 @@
 ; Comments
 (line_comment) @comment
 (block_comment) @comment
+(comment_text) @comment
 (doc_comment) @comment.doc
 
 ; Types
@@ -137,12 +138,23 @@
 
 ; Normal function call
 (call_exp_block
-  (var_exp (identifier) @function)
-  (par_exp))
+  (var_exp) @function
+  (par_exp)
+  (#not-eq? @function "async"))
 
 (call_exp_object
-  (var_exp (identifier) @function)
-  (par_exp))
+  (var_exp) @function
+  (par_exp)
+  (#not-eq? @function "async"))
+
+; Highlight async as keyword in call expressions
+(call_exp_block
+  (var_exp) @keyword
+  (#eq? @keyword "async"))
+
+(call_exp_object
+  (var_exp) @keyword
+  (#eq? @keyword "async"))
 
 ; Tuple projection
 (proj_identifier) @number
@@ -151,12 +163,14 @@
 (inst "system"? @type.special)
 (typ_params "system"? @type.special)
 (typ_bind
-  name: (type_identifier) @type)
+  name: (type_identifier) @type
+  (_
+    "<:"
+    supertype: (type_identifier) @type)?)
 
-; CamelCase for classes
-(_
-  (identifier) @type.class
-  (#match? @type.class "^_*[A-Z][A-Za-z0-9_]*$"))
+; Assume uppercase names are types
+((identifier) @type
+  (#match? @type "^[A-Z]"))
 
 ; Tags
 (tag_identifier
