@@ -15,11 +15,11 @@ Motoko language support for the [Zed editor](https://zed.dev/), allowing you to 
 
 ## Prerequisites
 
-For certain tasks
+For certain tasks:
 
 - [IC SDK](https://internetcomputer.org/docs/building-apps/getting-started/install)
-- [Mops](https://docs.mops.one/quick-start) (for some tasks)
-- [mo-dev](https://github.com/dfinity/motoko-dev-server#readme) (for some tasks)
+- [Mops](https://docs.mops.one/quick-start)
+- [mo-dev](https://github.com/dfinity/motoko-dev-server#readme)
 
 ## Development
 
