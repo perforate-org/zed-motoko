@@ -1,15 +1,29 @@
 # Motoko Language Support for Zed
 
-This extension provides Motoko language support for the [Zed editor](https://zed.dev/), allowing you to develop applications easily for the [Internet Computer](https://internetcomputer.org/) platform.
+[![Zed Extension][zed-extension-badge]][zed-extension-url]
+[![License][license-badge]][license-url]
 
-## Features
+[zed-extension-badge]: https://img.shields.io/badge/Zed%20Extension-%230951CF?style=flat&logo=zedindustries&logoColor=white&labelColor=black
+[zed-extension-url]: https://zed.dev/extensions/motoko
+[license-badge]: https://img.shields.io/badge/License-Apache_2.0_OR_MIT-blue.svg?style=flat&labelColor=black&color=blue
+[license-url]: #license
 
-- Language server integration for the Motoko language
-- Syntax highlighting for `.mo` files
-- Error checking and diagnostics
-- Code completion and navigation
+Motoko language support for the [Zed editor](https://zed.dev/), allowing you to develop applications easily for the [Internet Computer](https://internetcomputer.org/) platform.
+
+- Tree-sitter: [christoph-dfinity/tree-sitter-motoko](https://github.com/christoph-dfinity/tree-sitter-motoko)
+- Language Server: A part of [dfinity/vscode-motoko](https://github.com/dfinity/vscode-motoko)
+
+## Prerequisites
+
+For certain tasks
+
+- [IC SDK](https://internetcomputer.org/docs/building-apps/getting-started/install)
+- [Mops](https://docs.mops.one/quick-start) (for some tasks)
+- [mo-dev](https://github.com/dfinity/motoko-dev-server#readme) (for some tasks)
 
 ## Development
+
+To develop this extension, see the [Developing Extensions](https://zed.dev/docs/extensions/developing-extensions) section of the Zed docs.
 
 To contribute to this extension:
 
