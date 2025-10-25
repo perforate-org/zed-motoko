@@ -23,6 +23,7 @@
   "from_candid"
   "func"
   "if"
+  "in"
   "ignore"
   "import"
   "label"
