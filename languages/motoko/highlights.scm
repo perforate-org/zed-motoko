@@ -23,11 +23,13 @@
   "from_candid"
   "func"
   "if"
+  "in"
   "ignore"
   "import"
   "label"
   "let"
   "loop"
+  "mixin"
   "module"
   "not"
   "object"
@@ -48,6 +50,7 @@
   "try"
   "type"
   "var"
+  "weak"
   "while"
   "with"
 ] @keyword
@@ -68,6 +71,7 @@
 ; Comments
 (line_comment) @comment
 (block_comment) @comment
+(comment_text) @comment
 (doc_comment) @comment.doc
 
 ; Types
@@ -111,6 +115,10 @@
 (func_dec
   name: (identifier) @function)
 
+(_
+  (var_pat (identifier) @function)
+  (typ_annot (func_typ)))
+
 ; Properties
 (dot_exp_block
   (identifier) @property)
@@ -131,12 +139,23 @@
 
 ; Normal function call
 (call_exp_block
-  (var_exp (identifier) @function)
-  (par_exp))
+  (var_exp) @function
+  (par_exp)
+  (#not-eq? @function "async"))
 
 (call_exp_object
-  (var_exp (identifier) @function)
-  (par_exp))
+  (var_exp) @function
+  (par_exp)
+  (#not-eq? @function "async"))
+
+; Highlight async as keyword in call expressions
+(call_exp_block
+  (var_exp) @keyword
+  (#eq? @keyword "async"))
+
+(call_exp_object
+  (var_exp) @keyword
+  (#eq? @keyword "async"))
 
 ; Tuple projection
 (proj_identifier) @number
@@ -144,12 +163,24 @@
 ; Type parameters
 (inst "system"? @type.special)
 (typ_params "system"? @type.special)
+(typ_bind
+  name: (type_identifier) @type
+  (_
+    "<:"
+    supertype: (type_identifier) @type)?)
 
-; CamelCase for classes
-((identifier) @type.class
-  (#match? @type.class "^_*[A-Z][A-Za-z0-9_]*$"))
+; Assume uppercase names are types
+((identifier) @type
+  (#match? @type "^[A-Z]"))
 
 ; Tags
 (tag_identifier
   "#" @tag
   (identifier) @tag)
+
+; Record properties
+(object_exp
+  (exp_field (identifier) @property))
+
+(obj_typ
+  (val_tf (identifier) @property))

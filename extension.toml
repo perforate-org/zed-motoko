@@ -1,14 +1,14 @@
 id = "motoko"
 name = "Motoko"
 description = "Motoko support."
-version = "0.0.3"
+version = "0.0.4"
 schema_version = 1
 authors = ["Yota Inomoto <yota@perforate.org>"]
 repository = "https://github.com/perforate-org/zed-motoko"
 
 [grammars.motoko]
 repository = "https://github.com/christoph-dfinity/tree-sitter-motoko"
-rev = "b2df9eee5f207d26201b2a934c9d2655c6cdfda4"
+rev = "616001555aebe8d8f208185d59fb43c641b16c43"
 
 [language_servers.motoko-language-server]
 name = "Motoko Language Server"
