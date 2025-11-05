@@ -1,13 +1,80 @@
-use super::*;
+use crate::*;
 use log::{info, warn};
 
 const SERVER_PATH: &str = "extension/out/server.js";
 const PACKAGE_NAME: &str = "vscode-motoko";
 
-impl MotokoExtension {
+pub struct Motoko {
+    cached_script_path: Option<String>,
+}
+
+impl Motoko {
+    pub const LANGUAGE_SERVER_ID: &'static str = "motoko-language-server";
+    pub fn new() -> Self {
+        Self {
+            cached_script_path: None,
+        }
+    }
+
     /// Checks if the server script exists at the given path.
     fn server_exists(&self, server_path: &str) -> bool {
         fs::metadata(server_path).is_ok_and(|stat| stat.is_file())
+    }
+
+    pub fn language_server_command(
+        &mut self,
+        language_server_id: &LanguageServerId,
+        worktree: &Worktree,
+    ) -> zed::Result<Command> {
+        let server_path = self.server_script_path(language_server_id)?;
+
+        let env = LspSettings::for_worktree(Self::LANGUAGE_SERVER_ID, worktree)
+            .ok()
+            .and_then(|s| s.binary)
+            .and_then(|binary| binary.env);
+
+        Ok(zed::Command {
+            command: zed::node_binary_path()?,
+            args: vec![
+                env::current_dir()
+                    .unwrap()
+                    .join(&server_path)
+                    .to_string_lossy()
+                    .to_string(),
+                "--stdio".to_string(),
+            ],
+            env: env.into_iter().flat_map(|env| env.into_iter()).collect(),
+        })
+    }
+
+    pub fn language_server_workspace_configuration(
+        &mut self,
+        worktree: &Worktree,
+    ) -> zed::Result<Option<Value>> {
+        let mut settings = LspSettings::for_worktree(Self::LANGUAGE_SERVER_ID, worktree)
+            .map(|lsp_settings| lsp_settings.settings);
+
+        if !matches!(settings, Ok(Some(_))) {
+            settings = self
+                .language_server_initialization_options(worktree)
+                .map(|initialization_options| {
+                    initialization_options.and_then(|initialization_options| {
+                        initialization_options.get(Self::LANGUAGE_SERVER_ID).cloned()
+                    })
+                })
+        }
+
+        settings
+    }
+
+    pub fn language_server_initialization_options(
+        &mut self,
+        worktree: &Worktree,
+    ) -> zed::Result<Option<Value>> {
+        let options = LspSettings::for_worktree(Self::LANGUAGE_SERVER_ID, worktree)
+            .map(|lsp_settings| lsp_settings.initialization_options)?;
+
+        Ok(options)
     }
 
     /// Returns the path to the server script.

@@ -44,6 +44,10 @@
   (id) @type
   (datatype))
 
+; Assume uppercase names are types
+((id) @type
+  (#match? @type "^[A-Z]"))
+
 (methtype
   name: (name (id) @function))
 
