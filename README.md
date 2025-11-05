@@ -10,7 +10,8 @@
 
 Motoko language support for the [Zed editor](https://zed.dev/), allowing you to develop applications easily for the [Internet Computer](https://internetcomputer.org/) platform.
 
-- Tree-sitter: [christoph-dfinity/tree-sitter-motoko](https://github.com/christoph-dfinity/tree-sitter-motoko)
+- Tree-sitter for Motoko: [christoph-dfinity/tree-sitter-motoko](https://github.com/christoph-dfinity/tree-sitter-motoko)
+- Tree-sitter for Candid: [perforate-org/tree-sitter-candid](https://github.com/perforate-org/tree-sitter-candid)
 - Language Server: A part of [dfinity/vscode-motoko](https://github.com/dfinity/vscode-motoko)
 
 ## Prerequisites

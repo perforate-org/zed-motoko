@@ -10,6 +10,10 @@ repository = "https://github.com/perforate-org/zed-motoko"
 repository = "https://github.com/christoph-dfinity/tree-sitter-motoko"
 rev = "616001555aebe8d8f208185d59fb43c641b16c43"
 
+[grammars.candid]
+repository = "https://github.com/perforate-org/tree-sitter-candid"
+rev = "91523a436ae4075e3cb8a341f64c6dd8b8820f25"
+
 [language_servers.motoko-language-server]
 name = "Motoko Language Server"
 languages = ["Motoko"]
