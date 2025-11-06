@@ -17,3 +17,7 @@ rev = "91523a436ae4075e3cb8a341f64c6dd8b8820f25"
 [language_servers.motoko-language-server]
 name = "Motoko Language Server"
 languages = ["Motoko"]
+
+[language_servers.candid-language-server]
+name = "Candid Language Server"
+languages = ["Candid"]

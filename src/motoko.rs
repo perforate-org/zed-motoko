@@ -6,16 +6,17 @@ use zed_extension_api::{
 
 mod language_servers;
 
-use crate::language_servers::Motoko;
+use crate::language_servers::{Motoko, Candid};
 
 /// Main extension for Motoko support in Zed
 struct MotokoExtension {
     motoko: Option<Motoko>,
+    candid: Option<Candid>,
 }
 
 impl zed::Extension for MotokoExtension {
     fn new() -> Self {
-        Self { motoko: None }
+        Self { motoko: None, candid: None }
     }
 
     fn language_server_command(
@@ -28,6 +29,10 @@ impl zed::Extension for MotokoExtension {
                 let motoko = self.motoko.get_or_insert_with(Motoko::new);
                 motoko.language_server_command(language_server_id, worktree)
             }
+            Candid::LANGUAGE_SERVER_ID => {
+                let candid = self.candid.get_or_insert_with(Candid::new);
+                candid.language_server_command(language_server_id, worktree)
+            }
             language_server_id => Err(format!("unknown language server: {language_server_id}")),
         }
     }
@@ -39,6 +44,9 @@ impl zed::Extension for MotokoExtension {
     ) -> zed::Result<Option<Value>> {
         if server_id.as_ref() == Motoko::LANGUAGE_SERVER_ID && let Some(motoko) = self.motoko.as_mut() {
             return motoko.language_server_workspace_configuration(worktree)
+        }
+        if server_id.as_ref() == Candid::LANGUAGE_SERVER_ID && let Some(candid) = self.candid.as_mut() {
+            return candid.language_server_workspace_configuration(worktree)
         }
 
         Ok(None)
@@ -53,6 +61,10 @@ impl zed::Extension for MotokoExtension {
             Motoko::LANGUAGE_SERVER_ID => {
                 let motoko = self.motoko.get_or_insert_with(Motoko::new);
                 motoko.language_server_initialization_options(worktree)
+            }
+            Candid::LANGUAGE_SERVER_ID => {
+                let candid = self.candid.get_or_insert_with(Candid::new);
+                candid.language_server_initialization_options(worktree)
             }
             language_server_id => Err(format!("unknown language server: {language_server_id}")),
         }

@@ -105,7 +105,8 @@ impl Motoko {
             .unwrap_or(&release.version);
 
         let latest_package_name = format!("{PACKAGE_NAME}-{release_version}");
-        let server_path = format!("{}/{}", &latest_package_name, SERVER_PATH);
+        let package_dir = format!("{PACKAGE_NAME}/{latest_package_name}");
+        let server_path = format!("{}/{}", &package_dir, SERVER_PATH);
 
         if !self.server_exists(&server_path) {
             zed::set_language_server_installation_status(
@@ -113,13 +114,16 @@ impl Motoko {
                 &zed::LanguageServerInstallationStatus::Downloading,
             );
 
+            fs::create_dir_all(PACKAGE_NAME)
+                .map_err(|e| format!("failed to create package directory {PACKAGE_NAME}: {e}"))?;
+
             let download_url = format!(
                 "https://github.com/dfinity/vscode-motoko/releases/download/v{release_version}/{latest_package_name}.vsix"
             );
 
             zed::download_file(
                 &download_url,
-                &latest_package_name,
+                &package_dir,
                 zed::DownloadedFileType::Zip,
             )
             .map_err(|e| format!("failed to download file: {e}, from: {download_url}, to: {server_path}, as: {latest_package_name}"))?;
@@ -137,9 +141,13 @@ impl Motoko {
     fn clean_old_packages(&self, latest_package_name: &str) -> Result<()> {
         let current_dir =
             env::current_dir().map_err(|e| format!("failed to get current directory: {e}"))?;
+        let package_root = current_dir.join(PACKAGE_NAME);
 
-        let entries =
-            fs::read_dir(&current_dir).map_err(|e| format!("failed to read directory: {e}"))?;
+        let entries = match fs::read_dir(&package_root) {
+            Ok(entries) => entries,
+            Err(e) if e.kind() == std::io::ErrorKind::NotFound => return Ok(()),
+            Err(e) => return Err(format!("failed to read directory: {e}")),
+        };
 
         for entry in entries {
             let entry = match entry {
