@@ -12,7 +12,7 @@ Motoko language support for the [Zed editor](https://zed.dev/), allowing you to 
 
 - Tree-sitter for Motoko: [christoph-dfinity/tree-sitter-motoko](https://github.com/christoph-dfinity/tree-sitter-motoko)
 - Tree-sitter for Candid: [perforate-org/tree-sitter-candid](https://github.com/perforate-org/tree-sitter-candid)
-- Language Server: A part of [dfinity/vscode-motoko](https://github.com/dfinity/vscode-motoko)
+- Language Server for Motoko: A part of [dfinity/vscode-motoko](https://github.com/dfinity/vscode-motoko)
 
 ## Prerequisites
 
@@ -21,6 +21,32 @@ For certain tasks:
 - [IC SDK](https://internetcomputer.org/docs/building-apps/getting-started/install)
 - [Mops](https://docs.mops.one/quick-start)
 - [mo-dev](https://github.com/dfinity/motoko-dev-server#readme)
+
+## Configuring
+
+### Formatter
+
+> [!NOTE]
+> The automatic Motoko formatter support for Zed has not been released yet.
+>
+> It should be available once the next [dfinity/vscode-motoko](https://github.com/dfinity/vscode-motoko) version is released.
+
+The Motoko formatter is based on Prettier, and you can configure it for each project using `.prettierrc`.
+For detailed configuration instructions, please refer to [dfinity/prettier-plugin-motoko](https://github.com/dfinity/prettier-plugin-motoko?tab=readme-ov-file#customization).
+
+Additionally, you can disable the formatter using Zed's settings:
+
+```json
+{
+  "lsp": {
+    "motoko-language-server": {
+      "initialization_options": {
+        "formatter": "none" // "prettier" by default
+      }
+    }
+  }
+}
+```
 
 ## Development
 
