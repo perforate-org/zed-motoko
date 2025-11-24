@@ -36,7 +36,7 @@ For detailed configuration instructions, please refer to [dfinity/prettier-plugi
 
 Additionally, you can disable the formatter using Zed's settings:
 
-```json
+```jsonc
 {
   "lsp": {
     "motoko-language-server": {
