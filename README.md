@@ -1,4 +1,4 @@
-# Motoko Language Support for Zed
+# Motoko and Candid Language Support for Zed
 
 [![Zed Extension][zed-extension-badge]][zed-extension-url]
 [![License][license-badge]][license-url]
@@ -8,7 +8,7 @@
 [license-badge]: https://img.shields.io/badge/License-Apache_2.0_OR_MIT-blue.svg?style=flat&labelColor=black&color=blue
 [license-url]: #license
 
-Motoko language support for the [Zed editor](https://zed.dev/), allowing you to develop applications easily for the [Internet Computer](https://internetcomputer.org/) platform.
+Motoko and Candid language support for the [Zed editor](https://zed.dev/), allowing you to develop applications easily for the [Internet Computer](https://internetcomputer.org/) platform.
 
 - Tree-sitter for Motoko: [christoph-dfinity/tree-sitter-motoko](https://github.com/christoph-dfinity/tree-sitter-motoko)
 - Tree-sitter for Candid: [perforate-org/tree-sitter-candid](https://github.com/perforate-org/tree-sitter-candid)
