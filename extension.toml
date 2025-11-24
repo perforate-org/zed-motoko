@@ -1,6 +1,6 @@
 id = "motoko"
 name = "Motoko"
-description = "Motoko support."
+description = "Motoko and Candid support. Visit the repository for more information."
 version = "0.0.4"
 schema_version = 1
 authors = ["Yota Inomoto <yota@perforate.org>"]
@@ -8,7 +8,7 @@ repository = "https://github.com/perforate-org/zed-motoko"
 
 [grammars.motoko]
 repository = "https://github.com/christoph-dfinity/tree-sitter-motoko"
-rev = "616001555aebe8d8f208185d59fb43c641b16c43"
+rev = "891ae5cda01d2e1f1e7fa8155f223bc12f537ead"
 
 [grammars.candid]
 repository = "https://github.com/perforate-org/tree-sitter-candid"

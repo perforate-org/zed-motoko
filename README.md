@@ -27,7 +27,7 @@ For certain tasks:
 ### Formatter
 
 > [!NOTE]
-> The automatic Motoko formatter support for Zed has not been released yet.
+> The format-on-save feature for Motoko has not yet been released for Zed.
 >
 > It should be available once the next [dfinity/vscode-motoko](https://github.com/dfinity/vscode-motoko) version is released.
 
