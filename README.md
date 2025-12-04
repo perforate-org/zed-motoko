@@ -8,6 +8,10 @@
 [license-badge]: https://img.shields.io/badge/License-Apache_2.0_OR_MIT-blue.svg?style=flat&labelColor=black&color=blue
 [license-url]: #license
 
+<p align="center">
+  <img src="https://github.com/perforate-org/zed-motoko/raw/main/assets/zed_motoko_icon_256.avif" alt="Zed Motoko Icon" />
+</p>
+
 Motoko and Candid language support for the [Zed editor](https://zed.dev/), allowing you to develop applications easily for the [Internet Computer](https://internetcomputer.org/) platform.
 
 - Tree-sitter for Motoko: [christoph-dfinity/tree-sitter-motoko](https://github.com/christoph-dfinity/tree-sitter-motoko)
