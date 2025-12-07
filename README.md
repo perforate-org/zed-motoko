@@ -31,11 +31,6 @@ For certain tasks:
 
 ### Formatter
 
-> [!NOTE]
-> The format-on-save feature for Motoko has not yet been released for Zed.
->
-> It should be available once the next [dfinity/vscode-motoko](https://github.com/dfinity/vscode-motoko) version is released.
-
 The Motoko formatter is based on Prettier, and you can configure it for each project using `.prettierrc`.
 For detailed configuration instructions, please refer to [dfinity/prettier-plugin-motoko](https://github.com/dfinity/prettier-plugin-motoko?tab=readme-ov-file#customization).
 
