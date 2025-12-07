@@ -12,7 +12,7 @@
   <img src="https://github.com/perforate-org/zed-motoko/raw/main/assets/zed_motoko_icon_256.avif" alt="Zed Motoko Icon" />
 </p>
 
-Motoko and Candid language support for the [Zed editor](https://zed.dev/), allowing you to develop applications easily for the [Internet Computer](https://internetcomputer.org/) platform.
+Motoko and Candid language support for [Zed](https://zed.dev/), allowing you to develop applications easily for [Internet Computer](https://internetcomputer.org/).
 
 - Tree-sitter for Motoko: [christoph-dfinity/tree-sitter-motoko](https://github.com/christoph-dfinity/tree-sitter-motoko)
 - Tree-sitter for Candid: [perforate-org/tree-sitter-candid](https://github.com/perforate-org/tree-sitter-candid)
