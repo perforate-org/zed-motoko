@@ -57,6 +57,7 @@
 
 ; Literals
 (bool_literal) @boolean
+
 (null_literal) @constant
 
 [
@@ -66,12 +67,16 @@
 ] @number
 
 (text_literal) @string
+
 (char_literal) @string.special
 
 ; Comments
 (line_comment) @comment
+
 (block_comment) @comment
+
 (comment_text) @comment
+
 (doc_comment) @comment.doc
 
 ; Types
@@ -97,27 +102,56 @@
   (rel_op)
 ] @operator
 
-["->" "=" "<:" "?" ":" "<" ">"] @operator
+[
+  "->"
+  "="
+  "<:"
+  "?"
+  ":"
+  "<"
+  ">"
+] @operator
 
-(bang_exp_block "!" @operator)
-(bang_exp_object "!" @operator)
+(bang_exp_block
+  "!" @operator)
 
-(assign_exp_block ":=" @operator)
-(assign_exp_object ":=" @operator)
+(bang_exp_object
+  "!" @operator)
 
-(not_exp "not" @operator)
+(assign_exp_block
+  ":=" @operator)
+
+(assign_exp_object
+  ":=" @operator)
+
+(not_exp
+  "not" @operator)
 
 ; Punctuation
-["(" ")" "[" "]" "{" "}"] @punctuation.bracket
-["." "," ";"] @punctuation.delimiter
+[
+  "("
+  ")"
+  "["
+  "]"
+  "{"
+  "}"
+] @punctuation.bracket
+
+[
+  "."
+  ","
+  ";"
+] @punctuation.delimiter
 
 ; Functions
 (func_dec
   name: (identifier) @function)
 
 (_
-  (var_pat (identifier) @function)
-  (typ_annot (func_typ)))
+  (var_pat
+    (identifier) @function)
+  (typ_annot
+    (func_typ)))
 
 ; Properties
 (dot_exp_block
@@ -130,12 +164,12 @@
 (call_exp_block
   (dot_exp_block
     (identifier) @function.method)
-    (par_exp))
+  (par_exp))
 
 (call_exp_object
   (dot_exp_object
     (identifier) @function.method)
-    (par_exp))
+  (par_exp))
 
 ; Normal function call
 (call_exp_block
@@ -161,8 +195,12 @@
 (proj_identifier) @number
 
 ; Type parameters
-(inst "system"? @type.special)
-(typ_params "system"? @type.special)
+(inst
+  "system"? @type.special)
+
+(typ_params
+  "system"? @type.special)
+
 (typ_bind
   name: (type_identifier) @type
   (_
@@ -180,7 +218,9 @@
 
 ; Record properties
 (object_exp
-  (exp_field (identifier) @property))
+  (exp_field
+    (identifier) @property))
 
 (obj_typ
-  (val_tf (identifier) @property))
+  (val_tf
+    (identifier) @property))
