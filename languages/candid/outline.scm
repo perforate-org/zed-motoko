@@ -11,9 +11,13 @@
 
 (methtype
   name: (name)? @name
-  type: (functype (funcann) @context)?) @item
+  type: (functype
+    (funcann) @context)?) @item
 
 (constype
-  ["record" "variant"]
+  [
+    "record"
+    "variant"
+  ]
   (fieldtype
     (name) @name) @item)
