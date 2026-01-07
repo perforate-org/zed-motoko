@@ -91,7 +91,7 @@ impl Motoko {
         );
 
         let release = zed::latest_github_release(
-            "dfinity/vscode-motoko",
+            "caffeinelabs/vscode-motoko",
             zed::GithubReleaseOptions {
                 require_assets: true,
                 pre_release: false,
@@ -114,7 +114,7 @@ impl Motoko {
             );
 
             let download_url = format!(
-                "https://github.com/dfinity/vscode-motoko/releases/download/v{release_version}/{latest_package_name}.vsix"
+                "https://github.com/caffeinelabs/vscode-motoko/releases/download/v{release_version}/{latest_package_name}.vsix"
             );
 
             zed::download_file(
