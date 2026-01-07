@@ -55,13 +55,15 @@ impl Motoko {
             .map(|lsp_settings| lsp_settings.settings);
 
         if !matches!(settings, Ok(Some(_))) {
-            settings = self
-                .language_server_initialization_options(worktree)
-                .map(|initialization_options| {
+            settings = self.language_server_initialization_options(worktree).map(
+                |initialization_options| {
                     initialization_options.and_then(|initialization_options| {
-                        initialization_options.get(Self::LANGUAGE_SERVER_ID).cloned()
+                        initialization_options
+                            .get(Self::LANGUAGE_SERVER_ID)
+                            .cloned()
                     })
-                })
+                },
+            )
         }
 
         settings
@@ -91,7 +93,7 @@ impl Motoko {
         );
 
         let release = zed::latest_github_release(
-            "dfinity/vscode-motoko",
+            "caffeinelabs/vscode-motoko",
             zed::GithubReleaseOptions {
                 require_assets: true,
                 pre_release: false,
@@ -118,7 +120,7 @@ impl Motoko {
                 .map_err(|e| format!("failed to create package directory {PACKAGE_NAME}: {e}"))?;
 
             let download_url = format!(
-                "https://github.com/dfinity/vscode-motoko/releases/download/v{release_version}/{latest_package_name}.vsix"
+                "https://github.com/caffeinelabs/vscode-motoko/releases/download/v{release_version}/{latest_package_name}.vsix"
             );
 
             zed::download_file(
