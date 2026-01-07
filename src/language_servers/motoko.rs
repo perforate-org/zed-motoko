@@ -55,13 +55,15 @@ impl Motoko {
             .map(|lsp_settings| lsp_settings.settings);
 
         if !matches!(settings, Ok(Some(_))) {
-            settings = self
-                .language_server_initialization_options(worktree)
-                .map(|initialization_options| {
+            settings = self.language_server_initialization_options(worktree).map(
+                |initialization_options| {
                     initialization_options.and_then(|initialization_options| {
-                        initialization_options.get(Self::LANGUAGE_SERVER_ID).cloned()
+                        initialization_options
+                            .get(Self::LANGUAGE_SERVER_ID)
+                            .cloned()
                     })
-                })
+                },
+            )
         }
 
         settings
