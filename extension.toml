@@ -1,7 +1,7 @@
 id = "motoko"
 name = "Motoko"
 description = "Motoko and Candid support. Visit the repository for more information."
-version = "0.1.0"
+version = "0.1.1"
 schema_version = 1
 authors = ["Yota Inomoto <yota@perforate.org>"]
 repository = "https://github.com/perforate-org/zed-motoko"
