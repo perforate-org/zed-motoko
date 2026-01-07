@@ -8,11 +8,11 @@ repository = "https://github.com/perforate-org/zed-motoko"
 
 [grammars.motoko]
 repository = "https://github.com/christoph-dfinity/tree-sitter-motoko"
-rev = "891ae5cda01d2e1f1e7fa8155f223bc12f537ead"
+rev = "61330bf575122b4a6298fc653f0c019c7bd8103a"
 
 [grammars.candid]
 repository = "https://github.com/perforate-org/tree-sitter-candid"
-rev = "91523a436ae4075e3cb8a341f64c6dd8b8820f25"
+rev = "dfbc37c442614279b3ef90bd449fd90ed9e87ec9"
 
 [language_servers.motoko-language-server]
 name = "Motoko Language Server"
